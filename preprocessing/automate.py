@@ -6,8 +6,8 @@ def run_preprocessing():
     print("Memulai Otomatisasi Preprocessing")
     
     # 1. Tentukan Path 
-    input_path = 'Eksperimen_SML/heart_raw/heart.csv'
-    output_dir = 'Eksperimen_SML/preprocessing/heart_preprocessing'
+    input_path = 'heart_raw/heart.csv'
+    output_dir = 'preprocessing/heart_preprocessing'
     output_file = f'{output_dir}/heart_cleaned.csv'
     
     # Cek apakah file input ada
