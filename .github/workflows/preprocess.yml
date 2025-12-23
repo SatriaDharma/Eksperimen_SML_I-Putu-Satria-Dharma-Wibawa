@@ -1,0 +1,25 @@
+name: Heart Disease Automation
+on: [push]
+jobs:
+  run-preprocessing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python 3.12.7
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.7'
+
+      - name: Install Dependencies
+        run: pip install pandas scikit-learn
+
+      - name: Execute Preprocessing Script
+        run: python preprocessing/automate.py
+
+      - name: Archive Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: heart-preprocessed-data
+          path: preprocessing/heart_preprocessing/heart_cleaned.csv
