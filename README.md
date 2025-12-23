@@ -1,8 +1,7 @@
-# Eksperimen SML - Heart Disease Preprocessing
+# Kriteria 1: Tahapan Eksperimen Awal dengan Dataset Penyakit Jantung
 
-## 🚀 Fitur Advance (Kriteria 1)
-- **Otomasi Preprocessing**: Menggunakan `automate.py`.
-- **GitHub Actions**: Workflow otomatis yang memproses dataset mentah menjadi dataset siap latih setiap kali ada perubahan.
+## 📋 Ringkasan
+Bagian ini berfokus pada tahap eksperimen awal menggunakan dataset penyakit jantung. Diimplementasikan juga Workflow otomatis yang memproses dataset mentah menjadi dataset siap latih setiap kali ada perubahan.
 
 ## 📁 Struktur Folder
 - `heart_raw/`: Dataset asli.
