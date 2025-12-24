@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.preprocessing import StandardScaler
 import os
 
@@ -8,7 +10,6 @@ def run_preprocessing():
     # 1. Tentukan Path 
     input_path = 'heart_raw/heart.csv'
     output_dir = 'preprocessing/heart_preprocessing'
-    output_file = f'{output_dir}/heart_cleaned.csv'
     
     # Cek apakah file input ada
     if not os.path.exists(input_path):
@@ -19,30 +20,35 @@ def run_preprocessing():
     df = pd.read_csv(input_path)
     print(f"Data asli dimuat. Ukuran: {df.shape}")
 
-    # 3. Salin Data untuk Preprocessing
+    # Salin data untuk preprocessing
     df_clean = df.copy()
 
-    # 4. Menghapus Duplikat
-    df_clean = df.drop_duplicates()
-    print(f"Duplikat dihapus. Ukuran sekarang: {df_clean.shape}")
+    # 1. Menghapus atau Menangani Data Kosong (Missing Values)
+    # Dalam dataset ini, tidak ada missing values, jadi kita lewati langkah ini.
 
-    # 5. Standardisasi Fitur Numerik
+    # 2. Menghapus Duplikat
+    df_clean = df_clean.drop_duplicates()
+
+    # 3. Normalisasi atau Standarisasi Fitur Numerik
     scaler = StandardScaler()
     num_cols = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']
-    
-    try:
-        df_clean[num_cols] = scaler.fit_transform(df_clean[num_cols])
-        print("Standardisasi fitur numerik berhasil.")
-    except Exception as e:
-        print(f"Error saat standardisasi: {e}")
-        return
+    df_clean[num_cols] = scaler.fit_transform(df_clean[num_cols])
 
-    # 6. Menyimpan Hasil
+    # 4. Penanganan Outlier
+    # Tidak dilakukan, karena data outlier sedikit, dan mungkin penting untuk analisis medis.
+
+    # 5. Encoding Data Kategorikal
+    # Semua fitur sudah dalam format numerik, jadi tidak perlu encoding tambahan.
+
+    # 6. Binning (Pengelompokan Data)
+    # Tidak dilakukan, karena tidak diperlukan untuk analisis ini.
+
+    # 7. Menyimpan Data Hasil Preprocessing
     os.makedirs(output_dir, exist_ok=True)
-    df_clean.to_csv(output_file, index=False)
-    
-    print(f"Berhasil! Data bersih disimpan di: {output_file}")
-    print(f"Ukuran final: {df_clean.shape}")
+    df_clean.to_csv(f"{output_dir}/heart_cleaned.csv", index=False)
+
+    print(f"Preprocessing selesai. Data disimpan di {output_dir}/heart_cleaned.csv")
+    print(f"Ukuran Dataset Setelah Preprocessing: {df_clean.shape}")
     print("Otomatisasi Selesai")
 
 if __name__ == "__main__":
